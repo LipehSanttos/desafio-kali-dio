@@ -17,3 +17,4 @@ _Configurações > Expert > Rede > Ligado a > host-only_
 
 <img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap02.png" alt ="Screenshot 1" width="650">
 
+## Criando os nomes de **Usuários** e **Senhas**  
