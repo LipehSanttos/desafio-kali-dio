@@ -30,5 +30,15 @@ Utilizando o medusa uso o a linha de comando **-h** seguido do host alvo, em seg
 ```medusa -h 192.168.56.102 -U usesr.txt -P pass.txt -M ftp -t 6```
 
 Após rodar o código analisamos e buscamos quais resultados obtiveram **Sucesso**  
+
 <img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap03.png" alt ="Screenshot 3" width="650">
 
+## Estabelecendo a conexão com o alvo  
+Tendo descoberto as credenciais de acesso ao FTP, vamos para a tentativa de conexão e acesso usando o comando:
+```ftp 192.168.56.102``` 
+É solicitado o login e senha, mas agora já sabemos que ambos são **msfadmin**
+ e assim obtemos o **Login sucessful**
+
+ <img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap04.png" alt ="Screenshot 4" width="650">
+
+ 
