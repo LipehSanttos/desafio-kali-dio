@@ -25,4 +25,10 @@ _Configurações > Expert > Rede > Ligado a > host-only_
 ```echo -e '123456\npassword\nqwerty\nmsfadmin' > pass.txt```
 
 ## Rodando o primeiro ataque usando o Medusa  
+Utilizando o medusa uso o a linha de comando **-h** seguido do host alvo, em seguida **-U** e informo o nome do arquivo com a lista de usuário, após isso **-P** com o nome do arquivo com a lista de senhas, seguindo com **-M ftp** para informar qual serviço será atacado e por fim **-t 6** para usar 6 Threads simultâneas, deixando a linha de código da seguinte forma:  
+
+```medusa -h 192.168.56.102 -U usesr.txt -P pass.txt -M ftp -t 6```
+
+Após rodar o código analisamos e buscamos quais resultados obtiveram **Sucesso**  
 <img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap03.png" alt ="Screenshot 3" width="650">
+
