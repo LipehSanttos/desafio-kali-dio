@@ -1,6 +1,11 @@
-### Desafio-kali
+# Desafio-kali -  Pentest prático em ambiente local
 
-**Download Kali Linux e Metasploitable 2**
+## Autor: **Eduardo Felipe**
+
+## Resumo:  
+Projeto prático que demonstra a implantação e execução de ataques de força bruta e password spraying em um ambiente de laboratório usando Kali Linux, Metasploitable 2, Medusa, Hydra e ferramentas auxiliares (enum4linux, smbclient). O objetivo é entender técnicas ofensivas e principalmente, documentar recomendações de mitigação.  
+
+## **Download Kali Linux e Metasploitable 2**
 
 [Kali Linux](https://www.kali.org/)  
 [Metasploitable 2](https://sourceforge.net/projects/metasploitable2/files/metasploitable-linux-2.0.0.zip/download)
@@ -65,5 +70,46 @@ hydra -L users.txt -P pass.txt 192.168.56.102 http-form-post /
 -  ```-L users.txt``` e ```-P pass.txt``` são as wordlists.  
 -  ```http-form-post``` e a string ```"/path:postdata:fail-string"```.  
 - ``` ^USER^``` e ```^PASS^``` serão substituídos.  
--  ```-V``` visualizar cada tentativa.
+-  ```-V``` visualizar cada tentativa.  
+
+## Executando **password spraying** em SMB com enumeração de usuários  
+Diferentemente do Brute Force que testa várias senhas em um usuário, o password spraying testa algumas senhas (mais comuns) em diversos usuários diferentes.
+
+### Utilizando o ```enum4linux``` passo seguinte comando para obtenção de informações.
+
+```
+enum4linux -a 192.168.56.102 > enum4linux_output.txt
+```
+<img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap06.png" alt ="Screenshot 6" width="650">  
+Dessa forma pode-se coletar lista de usuários e outras informações úteis.
+
+### Nesse momento devo criar minhas wordlists para os usuários e senhas possíveis.
+
+```
+echo -e "user\nmsfadmin\nservice" > smb_users.txt
+
+echo -e "password\nsenha\n123456\Welcome123\nmsfadmin" > senhas_spray.txt
+```
+### Criada as wordlist, utilizando o **medusa** para tentar encontrar as credenciais, conforme código e imagem:  
+<img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/Snap07.png" alt ="Screenshot 7" width="650">  
+
+Assim é encontrado as credenciais conforme as wordlists.
+### Para confirmar o acesso vamos testar usando o ```smbclient```   
+```
+smbclient -L //192.168.56.102 -U msfadmin
+```
+É solicitado uma senha e vamos testar uma senha qualquer para testar.
+<img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap08.png" alt ="Screenshot 8" width="650">
+Senha Incorreta  
+
+Agora vamos testar a senha encontrada com o medusa.  
+
+<img src="https://github.com/LipehSanttos/desafio-kali-dio/blob/main/images/snap09.png" alt ="Screenshot 9" width="650">  
+
+Pronto! Conseguimos acesso.  
+
+
+
+## Conclusão  
+Neste desafio foi possível montar um ambiente de teste, executar ataques de força bruta em FTP e formularios web, e realizar password spraying em SMB com enumeração de usuários. O exercício reforça a importância de boas políticas de senha, MFA e monitoramento para mitigar riscos de comprometimento por ataques de força bruta e password spraying.
 
